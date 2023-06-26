@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Exceptions;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -29,28 +27,4 @@ class Handler extends ExceptionHandler
             //
         });
     }
-
-protected function unauthenticated($request, AuthenticationException $exception)
-{
-    return response()->json(['error' => 'Unauthenticated'], 401);
-}
-
-/**
- * Render an exception into an HTTP response.
- *
- * @param  \Illuminate\Http\Request  $request
- * @param  \Throwable  $exception
- * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
- */
-public function render($request, Throwable $exception)
-{
-    if ($exception instanceof UnauthorizedHttpException || $exception instanceof AuthenticationException) {
-        return response()->json(['error' => 'Unauthenticated'], 401);
-    } elseif ($exception instanceof AuthorizationException) {
-        return response()->json(['error' => 'Unauthorized'], 403);
-    }
-
-    return parent::render($request, $exception);
-}
-
 }
