@@ -5,62 +5,52 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Model\Task;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $tasks = Task::all();
+        return response()->json(['tasks' => $tasks]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        $task = new Task();
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->user_id = $user->id;
+        $task->save();
+
+        return response()->json(['task' => $task], 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTaskRequest $request)
+    public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        return response()->json(['task' => $task]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Task $task)
+    public function update(Request $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->save();
+
+        return response()->json(['task' => $task]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $task)
+    public function destroy($id)
     {
-        //
-    }
+        $task = Task::findOrFail($id);
+        $task->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateTaskRequest $request, Task $task)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Task $task)
-    {
-        //
+        return response()->json(['message' => 'Task deleted successfully']);
     }
 }
+
