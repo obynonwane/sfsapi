@@ -14,7 +14,12 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
+         // Get the authenticated user
+        $user = Auth::user();
+
+        // Retrieve tasks belonging to the logged-in user
+        $tasks = Task::where('user_id', $user->id)->get();
+
         return response()->json(['tasks' => $tasks]);
     }
 
