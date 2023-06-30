@@ -30,9 +30,11 @@ class TaskController extends Controller
         $task = new Task();
         $task->title = $request->input('title');
         $task->description = $request->input('description');
+        $task->start_date = $request->input('startDate'); // Add start_date field
+        $task->end_date = $request->input('endDate'); // Add end_date field
+        $task->severity = $request->input('severity'); // Add severity field
         $task->user_id = $user->id;
         $task->save();
-
         return response()->json(['task' => $task], Response::HTTP_CREATED);
     }
 
@@ -52,6 +54,9 @@ class TaskController extends Controller
             $task = Task::findOrFail($id);
             $task->title = $request->input('title');
             $task->description = $request->input('description');
+            $task->start_date = $request->input('startDate'); // Add start_date field
+            $task->end_date = $request->input('endDate'); // Add end_date field
+            $task->severity = $request->input('severity'); // Add severity field
             $task->save();
 
             return response()->json(['task' => $task]);
