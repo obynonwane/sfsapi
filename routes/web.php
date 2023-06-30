@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return ["name" =>"SFS Finace", "message"=> "this the api doc"];
 });
