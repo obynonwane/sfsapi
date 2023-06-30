@@ -19,7 +19,7 @@
 <h1>Installation</h1>
 
 <ul>
-<li>Clone the repo <code>git clone https://github.com/obynonwane/sfsapi</code></li>
+<li>Clone the repo <code>git clone https://github.com/obynonwane/sfsapi.git</code></li>
 <li><code>cd </code> to project folder.</li>
 <li>Run <code>composer install</code></li>
 <li>Save the <code>.env.example</code> as <code>.env</code> and set your database information</li>
