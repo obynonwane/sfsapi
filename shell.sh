@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change to your Laravel project directory
-# cd /path/to/your/laravel/project
+## cd /path/to/your/laravel/project
 
 while true; do
   # Run the passport:keys command
@@ -14,5 +14,5 @@ while true; do
   chmod 600 storage/oauth-public.key
 
   # Delay for 1 minute
-  sleep 60
+  sleep 120
 done
