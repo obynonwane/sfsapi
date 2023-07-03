@@ -5,7 +5,7 @@
 
 while true; do
   # Run the passport:keys command
-  php artisan passport:keys
+  php artisan passport:keys --force
 
   # Set permissions for the private key
   chmod 600 storage/oauth-private.key
